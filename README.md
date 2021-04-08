@@ -1,5 +1,6 @@
 # fisheye
 Fish eye lens image effect in C
+![alt text](http://mattgraphics.com/fisheyeex.jpg)
 
 # Dependencies:
 SDL2, SDL_image
