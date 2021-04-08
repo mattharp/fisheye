@@ -8,4 +8,4 @@ SDL2, SDL_image
 gcc fisheye.c -lSDL2main -lSDL2 -lSDL2_image -o fisheye
 
 # Usage:
-./fisheye image.bmp (bmp, tif, png, of jpeg supported)
+./fisheye image.bmp (bmp, tif, png, jpeg supported)
