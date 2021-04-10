@@ -1,5 +1,5 @@
 # fisheye
-Fish eye lens image effect in C
+Fish eye lens image effect in C<br/>
 ![alt text](http://mattgraphics.com/fisheyeex.jpg)
 
 # Dependencies:
