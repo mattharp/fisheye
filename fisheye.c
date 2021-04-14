@@ -1,6 +1,6 @@
 #define SDL_MAIN_HANDLED
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
+//#include "SDL2/SDL_image.h"
 #include "stdio.h"
 #include "math.h"
 
@@ -30,23 +30,19 @@ Uint32 get_pixel(SDL_Surface *surface, int x, int y)
         case 1:
             return *p;
             break;
-
         case 2:
             return *(Uint16 *)p;
             break;
-
         case 3:
             if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
                 return p[0] << 16 | p[1] << 8 | p[2];
             else
                 return p[0] | p[1] << 8 | p[2] << 16;
                 break;
-
-            case 4:
+        case 4:
                 return *(Uint32 *)p;
                 break;
-
-            default:
+        default:
                 return 0;
           }
 }
@@ -152,7 +148,8 @@ void close()
 
 SDL_Surface* load_surface( char* path )
 {
-    SDL_Surface* loadedSurface = IMG_Load( path );
+    //SDL_Surface* loadedSurface = IMG_Load( path );
+    SDL_Surface* loadedSurface = SDL_LoadBMP( path );
     return loadedSurface;
 }
 
