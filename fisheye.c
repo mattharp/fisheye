@@ -1,6 +1,6 @@
 #define SDL_MAIN_HANDLED
 #include "SDL2/SDL.h"
-//#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_image.h"
 #include "stdio.h"
 #include "math.h"
 
@@ -148,8 +148,7 @@ void close()
 
 SDL_Surface* load_surface( char* path )
 {
-    //SDL_Surface* loadedSurface = IMG_Load( path );
-    SDL_Surface* loadedSurface = SDL_LoadBMP( path );
+    SDL_Surface* loadedSurface = IMG_Load( path );
     return loadedSurface;
 }
 
