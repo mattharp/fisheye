@@ -63,46 +63,41 @@ void fish_eye(SDL_Surface *surface, double w, double h)
     tmpSurface = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
     SDL_FillRect(tmpSurface, NULL, SDL_MapRGB(tmpSurface->format, 0, 0, 0));
 
-    //SDL_LockSurface(tmpSurface);
-
     for (int y=0;y<h;y++)
     {                                
-        // normalize y coordinate to -1 ... 1
+        // normalize y coordinate
         double ny = ((2*y)/h)-1;                        
         // pre calculate ny*ny
         double ny2 = ny*ny;                                
-        // for each column
+
         for (int x=0;x<w;x++)
         {                            
-            // normalize x coordinate to -1 ... 1
+            // normalize x coordinate
             double nx = ((2*x)/w)-1;                    
             // pre calculate nx*nx
             double nx2 = nx*nx;
-            // calculate distance from center (0,0)
+            // calculate distance from center
             double r = sqrt(nx2+ny2);                
             // discard pixels outside circle
             if (0.0<=r&&r<=1.0)
             {                            
                 double nr = sqrt(1.0-r*r);            
-                // new distance is between 0 ... 1
+                // new distance between 0 and 1
                 nr = (r + (1.0-nr)) / 2.0;
                 // discard radius greater than 1.0
                 if (nr<=1.0)
                 {
                     // calculate the angle for polar coordinates
                     double theta = atan2(ny,nx);         
-                    // calculate new x position with new distance in same angle
+                    // calculate new x position
                     double nxn = nr*cos(theta);        
-                    // calculate new y position with new distance in same angle
+                    // calculate new y position
                     double nyn = nr*sin(theta);        
-                    // map from -1 ... 1 to image coordinates
+                    // map to image coordinates
                     int x2 = (int)(((nxn+1)*w)/2.0);        
-                    // map from -1 ... 1 to image coordinates
                     int y2 = (int)(((nyn+1)*h)/2.0);        
-                    // find (x2,y2) position from source pixels
-                    int srcpos = (int)(y2*w+x2);            
-                    // make sure that position stays within arrays
-                    if (srcpos>=0 & srcpos < w*h)
+                    // make sure position is in bounds
+                    if (x2 >= 0 && y2 >=0 && x2 < w && y2 < h)
                     {
                         // get new pixel (x2,y2) and put it to target at (x,y)
                         set_pixel(tmpSurface, x, y, get_pixel(surface, x2, y2));
@@ -111,8 +106,6 @@ void fish_eye(SDL_Surface *surface, double w, double h)
             }
         }
     }
-
-    //SDL_UnlockSurface(tmpSurface);
 
     SDL_BlitSurface( tmpSurface, NULL, surface, NULL );
     SDL_FreeSurface( tmpSurface );
